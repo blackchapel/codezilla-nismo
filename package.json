@@ -1,0 +1,30 @@
+{
+  "name": "codezilla-nismo",
+  "version": "1.0.0",
+  "description": "CodeZilla Nismo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rosita-dmello/codezilla-nismo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rosita-dmello/codezilla-nismo/issues"
+  },
+  "homepage": "https://github.com/rosita-dmello/codezilla-nismo#readme",
+  "dependencies": {
+    "axios": "^0.26.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
