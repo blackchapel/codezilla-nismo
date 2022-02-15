@@ -1,28 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
-import React, {useState, useEffect} from "react"
-import axios from "axios"
+import React, {useState, useEffect} from "react";
+import {BrowserRouter, Route, Routes} from "react-router-dom"
+import Dashboard from "./components/Dashboard";
+import NavBar from "./components/NavBar";
+import Signup from "./components/Signup";
 
 function App() {
 
-  const[data, setData] = useState("");
-  async function fetchData() {
-    const res = await axios.get(`/api`);
-    setData(res.data.message);
-  }
-  useEffect(async () => {
-   
-   fetchData();
-  }, []);
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-    <p>{!data ? "Loading..." : data} </p>
-          
-      </header>
-    </div>
+   <BrowserRouter>
+   <NavBar />
+   <Routes>
+     <Route path="/" element={<Dashboard />}/>
+     <Route path="/signup" element={<Signup />} />
+   </Routes>
+   </BrowserRouter>
   );
 }
 
