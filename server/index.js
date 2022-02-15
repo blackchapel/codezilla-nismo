@@ -1,5 +1,6 @@
 // server/index.js
 const express = require("express");
+const db = require('./connection');
 const cors = require("cors");
 
 const PORT = process.env.PORT || 5001;
