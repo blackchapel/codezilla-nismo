@@ -38,6 +38,7 @@ export default function SignInSide() {
     console.log({
       email: data.get('email'),
       password: data.get('password'),
+
     });
   };
  
@@ -155,6 +156,7 @@ export default function SignInSide() {
                 </Link>
               </Grid>
             </Grid>
+            <Copyright sx={{ mt: 3 }} />
           </Box>
           </Box>
         </Grid>
