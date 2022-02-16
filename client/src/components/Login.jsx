@@ -45,8 +45,7 @@ export default function SignInSide() {
         <CssBaseline />
         <Grid
           item
-          xs={false}
-          sm={4}
+          sm={false}
           md={7}
           sx={{
             backgroundImage: 'url(/images/Signin.png)',
@@ -57,7 +56,7 @@ export default function SignInSide() {
             backgroundPosition: 'center',
           }}
         />
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <Grid item sm={12} md={5} component={Paper} elevation={6} square>
           <Box
             sx={{
               my: 8,

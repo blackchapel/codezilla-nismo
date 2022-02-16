@@ -2,6 +2,17 @@ import React from 'react'
 import {AppBar, Toolbar, Button, Link, Typography} from "@mui/material";
 
 function NavBar() {
+
+  const navItemStyle = {
+    textDecoration:"none",
+    my: 1,
+    mx: 1.5,
+    transitionDelay: "0.1s",
+    "&:hover" : {
+      color: "text.secondary",
+
+    }
+  }
   return (
     <AppBar
     position="sticky"
@@ -10,8 +21,8 @@ function NavBar() {
     sx={{ borderBottom: (theme) => `1px solid ${theme.palette.divider}` }}
   >
     <Toolbar sx={{ flexWrap: 'wrap' }}>
-      <Link href="/"  color="text.primary" sx={{textDecoration:"none"}}>
-        <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
+      <Link href="/"  color="text.primary" sx={{textDecoration:"none", flexGrow: 1}} noWrap>
+        <Typography variant="h6" color="inherit"  >
           Codezilla Nismo
         </Typography>
       </Link>
@@ -21,7 +32,7 @@ function NavBar() {
           variant="button"
           color="text.primary"
           href="/dashboard"
-          sx={{ my: 1, mx: 1.5 }}
+          sx={navItemStyle}
         >
           Dashboard
         </Link>
@@ -29,7 +40,7 @@ function NavBar() {
           variant="button"
           color="text.primary"
           href="/about"
-          sx={{ my: 1, mx: 1.5 }}
+          sx={navItemStyle}
         >
           About us
         </Link>
@@ -37,7 +48,7 @@ function NavBar() {
           variant="button"
           color="text.primary"
           href="/contact"
-          sx={{ my: 1, mx: 1.5 }}
+          sx={navItemStyle}
         >
           Contact us
         </Link>
