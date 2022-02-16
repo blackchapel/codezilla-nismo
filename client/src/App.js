@@ -8,6 +8,7 @@ import MyProfile from "./components/MyProfile";
 import NavBar from "./components/NavBar";
 import OtpSignup from "./components/OtpSignup";
 import Signup from "./components/Signup";
+import Footer from "./layout/Footer";
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
      <Route path="/otpverification" element={<OtpSignup />} />
      <Route path="/myprofile" element={<MyProfile />} />
    </Routes>
+   <Footer />
    </BrowserRouter>
   );
 }
