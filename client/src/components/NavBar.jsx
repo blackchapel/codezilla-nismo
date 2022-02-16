@@ -4,7 +4,7 @@ import {AppBar, Toolbar, Button, Link, Typography} from "@mui/material";
 function NavBar() {
   return (
     <AppBar
-    position="static"
+    position="sticky"
     color="default"
     elevation={0}
     sx={{ borderBottom: (theme) => `1px solid ${theme.palette.divider}` }}
@@ -17,29 +17,29 @@ function NavBar() {
         <Link
           variant="button"
           color="text.primary"
-          href="#"
+          href="/dashboard"
           sx={{ my: 1, mx: 1.5 }}
         >
-          Features
+          Dashboard
         </Link>
         <Link
           variant="button"
           color="text.primary"
-          href="#"
+          href="/about"
           sx={{ my: 1, mx: 1.5 }}
         >
-          Enterprise
+          About us
         </Link>
         <Link
           variant="button"
           color="text.primary"
-          href="#"
+          href="/contact"
           sx={{ my: 1, mx: 1.5 }}
         >
-          Support
+          Contact us
         </Link>
       </nav>
-      <Button href="#" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
+      <Button href="/login" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
         Login
       </Button>
     </Toolbar>
