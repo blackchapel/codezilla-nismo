@@ -3,13 +3,12 @@ import Cards from "@mui/material/Card";
 import {
   CardActionArea,
   CardContent,
-  CardHeader,
   Typography,
   CardMedia,
 } from "@mui/material";
 function Card() {
   return (
-    <Cards sx={{ maxWidth: "345px", backgroundColor: 'purple' }}>
+    <Cards sx={{ maxWidth: "500px", backgroundColor: 'purple', width: 'auto' }}>
       <CardActionArea>
         <CardContent>
          <Typography variant="h5" color='primary'>Card Title</Typography>
@@ -21,7 +20,7 @@ function Card() {
           alt="green iguana"
         />
          <CardContent>
-         <Typography variant="h7" color='GrayText'>Here is the devil</Typography>
+         <Typography variant="h7" color='GrayText'>here is devil</Typography>
         </CardContent>
       </CardActionArea>
     </Cards>
