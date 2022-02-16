@@ -39,6 +39,9 @@ export default function SignInSide() {
     console.log({
       email: data.get('email'),
       password: data.get('password'),
+      phone: data.get('phone'),
+      name: data.get('firstName') + " " + data.get('lastName'),
+      allowExtraEmails: data.get('allowExtraEmails')
 
     });
   };
