@@ -5,15 +5,16 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: lightslategrey;
 }
-@media screen and (max-width: 685px) {
-  body{
-    background-color: lightpink;
+/* @media screen and (max-width: 685px) {
+  background-adjust{
+    background-color: lightslategrey;
   }
 }
 
 @media screen and (min-width: 685px) {
-  body::before{
+  background-adjust::before{
     content: "";
     position: absolute;
     top: 0;
@@ -26,8 +27,8 @@ body {
     background-position: center;
     background-repeat: no-repeat; 
     opacity: 0.5; /*Value from 0.0 to 1.0*/
-  }
-}
+  /* } */
+/* } */
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
