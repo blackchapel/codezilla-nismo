@@ -26,8 +26,8 @@ function Footer() {
       >
         <Grid
           container
-          direction="row-reverse"
-          justifyContent="flex-start"
+          direction="row"
+          justifyContent="center"
           alignItems="center"
           spacing={3}
         >
