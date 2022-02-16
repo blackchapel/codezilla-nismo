@@ -10,9 +10,12 @@ function NavBar() {
     sx={{ borderBottom: (theme) => `1px solid ${theme.palette.divider}` }}
   >
     <Toolbar sx={{ flexWrap: 'wrap' }}>
-      <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
-        Codezilla Nismo
-      </Typography>
+      <Link href="/"  color="text.primary" sx={{textDecoration:"none"}}>
+        <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
+          Codezilla Nismo
+        </Typography>
+      </Link>
+     
       <nav>
         <Link
           variant="button"
