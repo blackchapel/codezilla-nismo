@@ -1,7 +1,7 @@
 import React from "react";
-import { Stack, Typography, Paper, Button } from "@mui/material";
-import { FaGithub } from "react-icons/fa";
-import './Footer.css';
+import { Grid, Typography, Paper, Button, ButtonGroup } from "@mui/material";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import "./Footer.css";
 function Footer() {
   return (
     <Paper
@@ -9,7 +9,6 @@ function Footer() {
       square={true}
       sx={{
         marginTop: "20px",
-        borderRadius: "20px",
         backgroundImage:
           "url('https://media.istockphoto.com/vectors/abstract-two-tone-gradient-background-vector-id1197234186?b=1&k=20&m=1197234186&s=612x612&w=0&h=0bpI-k6I9DJ6wCuzI3OeLSTWwcc_5v7j8xVFo6GXIHQ=')",
         backgroundRepeat: "no-repeat",
@@ -17,60 +16,117 @@ function Footer() {
         backgroundPosition: "center",
       }}
     >
-      <Stack
+      <Grid 
+      conatainer
         direction="row"
-        justifyContent="space-evenly"
+        justifyContent="flex-start"
         alignItems="flex-start"
-        spacing={2}
       >
-        <div>
-          <Typography variant="h5" sx={{ marginLeft: "5px" }}>
-            Contributions:
-          </Typography>
-          <ul style={{ listStyleType: "none" }}>
-            <li>
-              <Typography variant="subtitle">Kunal Chandwani </Typography>
-            </li>
-            <li>
-              <Typography variant="subtitle">Yash Brahmbhatt </Typography>
-            </li>
-            <li>
-              <Typography variant="subtitle">Vidhita Pai </Typography>
-            </li>
-            <li>
-              <Typography variant="subtitle">Rosita D'mello </Typography>
-            </li>
-          </ul>
-        </div>
-        <div style={{ margin: "auto" }}>
-          <Stack
-            direction="row"
+        <Grid item style={{ margin: "auto" }}>
+          <Grid
+          container
+            direction="column"
             justifyContent="flex-start"
             alignItems="center"
-            spacing={0}
           >
-            <div style={{fontSize: "50px"}}>
+            <Grid item style={{ fontSize: "50px" }}>
               <FaGithub />
-            </div>
-            <ul style={{listStyleType: "none"}}>
-            <li>
-              <Button variant="contained" size="small">
-              <a href="https://github.com/Yashpb1513" target="_blank" rel="noreferrer">Github-To-Kunal</a>
+            </Grid>
+            <Grid item>
+            <ButtonGroup variant="text" >
+            <Button>
+                  <a
+                    href="https://github.com/Yashpb1513"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                   Kunal 
+                  </a>
               </Button>
-            </li>
-            <li>
-              <a href="https://github.com/Yashpb1513" target="_blank" rel="noreferrer">Github-To-Yash</a>
-            </li>
-            <li>
-              <a href="https://github.com/Yashpb1513" target="_blank" rel="noreferrer">Github-To-Vidhita</a>
-            </li>
-            <li>
-              <a href="https://github.com/Yashpb1513" target="_blank" rel="noreferrer">Github-To-Rosita</a>
-            </li>
-            </ul>
-          </Stack>
-        </div>
-      </Stack>
+              <Button>
+                  <a
+                    href="https://github.com/Yashpb1513"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Yash
+                  </a>
+                </Button>
+              <Button>
+                  <a
+                    href="https://github.com/Yashpb1513"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Vidhita
+                  </a>
+                </Button>
+                <Button>
+                  <a
+                    href="https://github.com/Yashpb1513"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                  Rosita
+                  </a>
+                </Button>
+            </ButtonGroup>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid item style={{ marginTop: "20px" }}>
+          <Grid
+            container
+            direction="column"
+            justifyContent="flex-start"
+            alignItems="center"
+          >
+            <Grid item style={{ fontSize: "40px" }}>
+              <FaLinkedin />
+            </Grid>
+            <Grid item>
+            <ButtonGroup variant="text" >
+            <Button>
+                  <a
+                    href="https://github.com/Yashpb1513"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                   Kunal 
+                  </a>
+              </Button>
+              <Button>
+                  <a
+                    href="https://github.com/Yashpb1513"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Yash
+                  </a>
+                </Button>
+              <Button>
+                  <a
+                    href="https://github.com/Yashpb1513"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Vidhita
+                  </a>
+                </Button>
+                <Button>
+                  <a
+                    href="https://github.com/Yashpb1513"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                  Rosita
+                  </a>
+                </Button>
+            </ButtonGroup>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
     </Paper>
   );
 }
