@@ -8,7 +8,6 @@ function Footer() {
       elevation={7}
       square={true}
       sx={{
-        marginTop: "20px",
         backgroundImage:
           "url('https://media.istockphoto.com/vectors/abstract-two-tone-gradient-background-vector-id1197234186?b=1&k=20&m=1197234186&s=612x612&w=0&h=0bpI-k6I9DJ6wCuzI3OeLSTWwcc_5v7j8xVFo6GXIHQ=')",
         backgroundRepeat: "no-repeat",
