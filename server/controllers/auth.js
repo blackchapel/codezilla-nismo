@@ -2,7 +2,7 @@
 const { 
     User,
     removeSensitiveData
- } = require('../models/user');
+} = require('../models/user');
 const bcryptjs = require('bcryptjs');
 
 // Signup
