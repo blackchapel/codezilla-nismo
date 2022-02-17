@@ -1,5 +1,6 @@
 // Importing modules
 const User = require('../models/user');
+const { generateotp, sendSMS, sendEmail} = require("../utility/otp.js");
 const removeSensitiveData = require('../utility/functions');
 const bcryptjs = require('bcryptjs');
 
@@ -9,6 +10,37 @@ const signup = async (req, res) => {
         let newUser = new User(req.body);
         await newUser.save();
         const token = await User.generatejwt(newUser._id);
+
+        // Generating the OTP
+        const phoneOtp = generateotp(6);
+        const emailOtp = generateotp(6);
+
+        // Saving the OTP in database
+        newUser.phoneOTP = phoneOtp;
+        newUser.emailOTP = emailOtp;
+        await newUser.save();
+
+        // Sending the otp through sms
+        await sendSMS({
+            message: `Your OTP for registration is ${phoneOtp}`,
+            contactNumber: newUser.phone,
+            phoneOtp
+        });
+        console.log(1);
+        // Sending the otp through email
+        await sendEmail ({
+            message: `Dear User, your OTP for registration is ${emailOtp}`,
+            emailId: newUser.email,
+            emailOtp
+        });
+        console.log(2);
+        // Sending a response back
+        res.status(200).json({
+            message: "OTPs sent to Email and Phone",
+            data: {
+            userID: newUser._id,
+            },
+        });
 
         res.status(201).json({
             message: 'Account Successfully Created!',

@@ -16,7 +16,7 @@ router.post('/signup', signup);
 router.post('/login', login);
 router.post('/logout', authorizeJWT, logout);
 router.post('/logoutall', authorizeJWT, logoutall);
-router.post('/otp', authorizeJWT, verifyPhoneOTP);
+router.post('/otpverification', authorizeJWT, verifyPhoneOTP);
 
 // Exporting Modules
 module.exports = router;
