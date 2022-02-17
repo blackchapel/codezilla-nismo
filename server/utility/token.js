@@ -1,10 +1,9 @@
 // Importing modules
-const res = require('express/lib/response');
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv').config();
 
 // Generating a JSON web token
-const generatejwt = (payload) => {
+const generatejwt = function(payload) {
     const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '24h' });
     return token;
 };
@@ -25,4 +24,4 @@ const verifyjwt = (token) => {
 module.exports = {
     generatejwt,
     verifyjwt
-}
+};
