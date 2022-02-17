@@ -1,8 +1,6 @@
 // Importing modules
-const { 
-    User,
-    removeSensitiveData
-} = require('../models/user');
+const User = require('../models/user');
+const removeSensitiveData = require('../utility/functions');
 const bcryptjs = require('bcryptjs');
 
 // Signup
@@ -12,11 +10,9 @@ const signup = async (req, res) => {
         await newUser.save();
         const token = await User.generatejwt(newUser._id);
 
-        newUser = removeSensitiveData(newUser);
-
         res.status(201).json({
             message: 'Account Successfully Created!',
-            data: { newUser, token }
+            data: { token }
         });
     } catch(error) {
         res.status(400).json({

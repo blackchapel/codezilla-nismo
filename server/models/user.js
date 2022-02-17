@@ -85,20 +85,7 @@ userSchema.statics.generatejwt = async (userid) => {
     return token;
 };
 
-// Removing sensitive data from Public Profile
-const removeSensitiveData = (data) => {
-    data.password = undefined;
-    data.tokens = undefined;
-    data.createdAt = undefined;
-    data.updatedAt = undefined;
-    data.__v = undefined;
-    return data;
-};
-
 const User = mongoose.model('User', userSchema);
 
 // Exporting the module
-module.exports = {
-    User,
-    removeSensitiveData
-};
+module.exports = User;
