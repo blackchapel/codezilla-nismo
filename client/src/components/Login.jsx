@@ -26,7 +26,7 @@ function Copyright(props) {
   );
 }
 
-const theme = createTheme();
+
 
 export default function SignInSide() {
   const handleSubmit = (event) => {
@@ -39,20 +39,16 @@ export default function SignInSide() {
     });
   };
 
-  return (
-    <ThemeProvider theme={theme}>
-      <Grid container component="main" sx={{ height: '100vh' }}>
+  return (<Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
         <Grid
           item
           sm={false}
           md={7}
           sx={{
-            backgroundImage: 'url(/images/Signin.png)',
+            backgroundImage: 'url(/Icons/undraw_with_love_re_1q3m.svg)',
             backgroundRepeat: 'no-repeat',
-            backgroundColor: (t) =>
-              t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
-            backgroundSize: 'cover',
+            backgroundSize: 'auto',
             backgroundPosition: 'center',
           }}
         />
@@ -122,6 +118,6 @@ export default function SignInSide() {
           </Box>
         </Grid>
       </Grid>
-    </ThemeProvider>
+   
   );
 }

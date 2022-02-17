@@ -29,7 +29,6 @@ function Copyright(props) {
   );
 }
 
-const theme = createTheme();
 
 export default function SignInSide() {
   const handleSubmit = (event) => {
@@ -39,14 +38,15 @@ export default function SignInSide() {
     console.log({
       email: data.get('email'),
       password: data.get('password'),
+      phone: data.get('phone'),
+      name: data.get('firstName') + " " + data.get('lastName'),
+      allowExtraEmails: data.get('allowExtraEmails')
 
     });
   };
  
 
-  return (
-    <ThemeProvider theme={theme}>
-      <Grid container component="main" sx={{ height: '100vh' }}>
+  return (<Grid container component="main" sx={{ height: '100vh'}}>
         <CssBaseline />
         <Grid
           item
@@ -54,12 +54,11 @@ export default function SignInSide() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: 'url("/images/Signup.png")',
+            backgroundImage: 'url("/Icons/stars.svg")',
             backgroundRepeat: 'no-repeat',
-            backgroundColor: (t) =>
-              t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
-            backgroundSize: "cover",
+            backgroundSize: "auto",
             backgroundPosition: 'center',
+            
           }}
         />
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
@@ -152,7 +151,7 @@ export default function SignInSide() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/login" variant="body2">
+                <Link href="/login" variant="body2" color="secondary">
                   Already have an account? Sign in
                 </Link>
               </Grid>
@@ -162,6 +161,6 @@ export default function SignInSide() {
           </Box>
         </Grid>
       </Grid>
-    </ThemeProvider>
+    
   );
 }
