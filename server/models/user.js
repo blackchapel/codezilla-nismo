@@ -57,7 +57,7 @@ const userSchema = new mongoose.Schema (
 );
 
 // Hashing the password
-userSchema.pre('save', async function save(next) {
+userSchema.pre('save', async (next) => {
     if(!this.isModified('password')) { 
         return next();
     }
@@ -68,7 +68,7 @@ userSchema.pre('save', async function save(next) {
     } catch(error) {
       return next(error);
     }
-  });
+});
 
 // Validating the hashed password
 // userSchema.methods.validatePassword = async (data) => {
