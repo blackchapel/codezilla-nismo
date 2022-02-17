@@ -39,13 +39,14 @@ const signup = async (req, res) => {
             message: "OTPs sent to Email and Phone",
             data: {
             userID: newUser._id,
+            token
             },
         });
 
-        res.status(201).json({
-            message: 'Account Successfully Created!',
-            data: { token }
-        });
+        // res.status(201).json({
+        //     message: 'Account Successfully Created!',
+        //     data: { token }
+        // });
     } catch(error) {
         res.status(400).json({
             message: error.message
