@@ -12,17 +12,30 @@ import Footer from "./layout/Footer";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 function App() {
-  const theme = createTheme({
+  const theme = createTheme(  {
     palette: {
+      type: 'light',
+      primary: {
+        main: '#8fd071',
+      },
+      secondary: {
+        main: '#1F4910',
+      },
+    },
+    typography: {
+      fontFamily: 'Montserrat, sans-serif',
+      fontWeightRegular: 500,
     },
   });
+  
   return (
+    <ThemeProvider theme={theme}>
    <BrowserRouter>
    <NavBar />
    <Routes>
      <Route path="/dashboard" element={<Dashboard />}/>
      <Route path="/" element={<Home />}/>
-     <Route path="/signup" element={<Signup />} />
+     <Route path="/signup" element={<Signup theme={theme} />} />
      <Route path="/login" element={<Login />} />
      <Route path="/forgotpassword" element={<ForgotPassword />} />
      <Route path="/dashboard" element={<Dashboard />} />
@@ -31,6 +44,7 @@ function App() {
    </Routes>
    <Footer />
    </BrowserRouter>
+   </ThemeProvider>
   );
 }
 

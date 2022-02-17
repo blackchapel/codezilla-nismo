@@ -13,8 +13,6 @@ import DoneAllIcon from '@mui/icons-material/DoneAll';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 
 
-const theme = createTheme();
-
 export default function ForgotPassword() {
   // const handleSubmit = (event) => {
   //   event.preventDefault();
@@ -49,9 +47,7 @@ export default function ForgotPassword() {
     });
   }
  
-  return (
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs" sx={{marginBottom: 3}}>
+  return ( <Container component="main" maxWidth="xs" sx={{marginBottom: 3}}>
         <CssBaseline />
         {selected ? 
           <Box
@@ -123,6 +119,6 @@ export default function ForgotPassword() {
         }
         
       </Container>
-    </ThemeProvider>
+    
   );
 }

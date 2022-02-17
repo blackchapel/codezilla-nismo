@@ -16,7 +16,6 @@ function NavBar() {
   return (
     <AppBar
     position="sticky"
-    color="default"
     elevation={0}
     sx={{ borderBottom: (theme) => `1px solid ${theme.palette.divider}` }}
   >
@@ -53,7 +52,7 @@ function NavBar() {
           Contact us
         </Link>
       </nav>
-      <Button href="/login" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
+      <Button href="/login" variant="contained" sx={{ my: 1, mx: 1.5 }} color="secondary">
         Login
       </Button>
     </Toolbar>

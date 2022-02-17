@@ -25,7 +25,6 @@ export default function OtpSignup() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs" sx={{marginBottom: 3}}>
         <CssBaseline />
         <Box
@@ -71,6 +70,6 @@ export default function OtpSignup() {
           </Box>
         </Box>
       </Container>
-    </ThemeProvider>
+   
   );
 }
