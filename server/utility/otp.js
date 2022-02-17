@@ -36,19 +36,19 @@ const sendEmail = async ({ message, emailId }) => {
     try {
         console.log('first');
         let transporter = nodemailer.createTransport({
-            service: "gmail",
+            service: 'gmail',
             auth: {
-                type: "OAuth2",
-                user: 'verifyotp@gmail.com',
-                pass: '@Verifyotp1',
-                clientId: '221607411406-ppmtq4tnkpb5buscdubddqdoke25p5dg.apps.googleusercontent.com',
-                clientSecret: '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',
-                refreshToken: '1//04mkdT-ZeEU5sCgYIARAAGAQSNwF-L9IrmTV-WC-wCyS52T8ILCC83mSMfrWBR8poxz6yBtjLNX65Fk58PvLDuIC67lHIH-IVdSE'
+              type: 'OAuth2',
+              user: process.env.MAIL_USERNAME,
+              pass: process.env.MAIL_PASSWORD,
+              clientId: process.env.OAUTH_CLIENT_ID,
+              clientSecret: process.env.OAUTH_CLIENT_SECRET,
+              refreshToken: process.env.OAUTH_REFRESH_TOKEN
             }
-        });
-        console.log(second);
+          });
+        console.log("second");
         let mailOptions = {
-            from: "verifyotp@gmail.com",
+            from: "socialmigraine@gmail.com",
             to: emailId,
             subject: "OTP for Signup Verification",
             text: message
@@ -63,7 +63,7 @@ const sendEmail = async ({ message, emailId }) => {
         });
         console.log('fourth');
     } catch(error) {
-        res.status(400).json({
+        res.json({
             message: error.message,
         });
         console.log(error);
