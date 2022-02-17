@@ -9,9 +9,13 @@ import NavBar from "./components/NavBar";
 import OtpSignup from "./components/OtpSignup";
 import Signup from "./components/Signup";
 import Footer from "./layout/Footer";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 function App() {
-
+  const theme = createTheme({
+    palette: {
+    },
+  });
   return (
    <BrowserRouter>
    <NavBar />
