@@ -1,6 +1,6 @@
 // Importing modules
 const mongoose = require("mongoose");
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 // Creating the schema
@@ -57,20 +57,23 @@ const userSchema = new mongoose.Schema (
 );
 
 // Hashing the password
-userSchema.pre('save', async (next) => {
-    const user = this.user;
-    //console.log(user);
-    if (this.password) {
-        const salt = await bcrypt.genSalt(10);
-        this.password = await bcrypt.hash(this.password, salt);
+userSchema.pre('save', async function save(next) {
+    if(!this.isModified('password')) { 
+        return next();
     }
-    
-    // const user = this;
-    // console.log(user);
-    // const hash = await bcryptjs.hash(user.password, 8);
-    // user.password = hash;
-    next();
-});
+    try {
+      const salt = await bcrypt.genSalt(10);
+      this.password = await bcrypt.hash(this.password, salt);
+      return next();
+    } catch(error) {
+      return next(error);
+    }
+  });
+
+// Validating the hashed password
+// userSchema.methods.validatePassword = async (data) => {
+//     return bcrypt.compare(data, this.password);
+// };
 
 // Generating jwt
 userSchema.statics.generatejwt = async (userid) => {
@@ -81,7 +84,17 @@ userSchema.statics.generatejwt = async (userid) => {
     return token;
 };
 
+// Removing sensitive data from Public Profile
+const removeSensitiveData = (data) => {
+    data.password = undefined;
+    data.tokens = undefined;
+    return data;
+};
+
 const User = mongoose.model('User', userSchema);
 
 // Exporting the module
-module.exports = User;
+module.exports = {
+    User,
+    removeSensitiveData
+};
