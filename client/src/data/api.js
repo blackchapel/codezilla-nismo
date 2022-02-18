@@ -1,0 +1,78 @@
+import axios from "axios";
+
+const apiUrl = "http://localhost:5001/api/";
+
+export const signupPost = async (formData) => {
+  try {
+    const {data} = await axios.post(apiUrl + "user/signup", formData);
+    console.log(data);
+    if (data) {
+        return (data);
+    }
+   
+    
+  } catch (err) {
+    throw err;
+  }
+};
+export const loginPost = async (formData) => {
+  try {
+    const { data } = await axios.post(apiUrl + "user/login", formData);
+    console.log(data);
+
+    if (data) {
+      return data;
+    }
+
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const verifyEmailOtp = async (formData) => {
+  try {
+    const { data } = await axios.post(apiUrl + "user/authenticate/emailotp", formData);
+    console.log(data);
+    if (data)
+    {return data};
+  } catch (err) {
+    throw err;
+  }
+};
+export const verifyPhoneOtp = async (formData) => {
+  try {
+    const { data } = await axios.post( apiUrl + "user/authenticate/phoneotp",
+      formData
+    );
+    console.log(data);
+    if (data) {
+      return data;
+    }
+  } catch (err) {
+    throw err;
+  }
+};
+export const verifyLoginOtp = async (formData) => {
+  try {
+    const { data } = await axios.post(
+      apiUrl + "user/authenticate/verifyLogin",
+      formData
+    );
+    console.log(data);
+    if (data) {
+      return data;
+    }
+  } catch (err) {
+    throw err;
+  }
+};
+
+
+
+export const productListing = async (data, id) => {
+  try {
+    await axios.post(apiUrl + "create/product/" + id, data);
+  } catch (err) {
+    throw err;
+  }
+}
