@@ -7,6 +7,7 @@ import Leaderboard from "./Leaderboard";
 import OngoingEvents from "./OngoingEvents";
 import { Fragment } from "react/cjs/react.production.min";
 import GlobalStyles from "@mui/material/GlobalStyles";
+import Air from "./Air";
 const itemData = [
   {
     img: "https://api.time.com/wp-content/uploads/2020/12/Anohi-Mita-Hanano-Namaewo-Bokutachiha-Mada-Shiranai_JP_JP_StoryArt.jpg?w=1600&quality=70",
@@ -45,8 +46,11 @@ function Home() {
   const growEffect = true;
   return (
     <Fragment>
-          <GlobalStyles
-        styles={{ ul: { margin: 0, padding: 0, listStyle: "none" }, body: {margin: 0} }}
+      <GlobalStyles
+        styles={{
+          ul: { margin: 0, padding: 0, listStyle: "none" },
+          body: { margin: 0 },
+        }}
       />
       <Stack
         direction="column"
@@ -65,14 +69,15 @@ function Home() {
         >
           <Grid
             container
-            direction="row-reverse"
-            justifyContent="flex-start"
+            direction="column"
+            justifyContent="center"
             alignItems="center"
             spacing={{ xs: 2, md: 3 }}
             padding={2}
             sx={{
-              backgroundImage:
-                "url('https://img.freepik.com/free-vector/hand-painted-watercolor-nature-background_23-2148941599.jpg?t=st=1645115741~exp=1645116341~hmac=6c26becc326569c60dd3fc25036dd47fbcaec6c5b954f6c9fc9d285b0e621284&w=1480')",
+              background: "linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(https://img.freepik.com/free-vector/hand-painted-watercolor-nature-background_23-2148941599.jpg?t=st=1645115741~exp=1645116341~hmac=6c26becc326569c60dd3fc25036dd47fbcaec6c5b954f6c9fc9d285b0e621284&w=1480)",
+              // backgroundImage:
+              //   "url('')",
               marginLeft: "20px",
               backgroundSize: "cover",
               backgroundPosition: "center",
@@ -80,30 +85,41 @@ function Home() {
             }}
           >
             <Grid item>
+              <Air />
+            </Grid>
+            <Grid item>
               <Card />
             </Grid>
           </Grid>
+          {/* <Grid
+            container
+            direction="row"
+            justifyContent="flex-start"
+            alignItems="flex-start"
+          > */}
+
+          {/* </Grid> */}
         </Grow>
-          <Grow
-            in={growEffect}
-            style={{ transformOrigin: "0 0 0" }}
-            {...(growEffect ? { timeout: 4000 } : {})}
-          >
-            <div>
-              <Grid
-                container
-                direction="row"
-                justifyContent="flex-start"
-                alignItems="flex-start"
-                spacing={4}
-                padding={3}
-              >
-                {itemData.map((item) => (
-                  <OngoingEvents item={item} />
-                ))}
-              </Grid>
-            </div>
-          </Grow>
+        <Grow
+          in={growEffect}
+          style={{ transformOrigin: "0 0 0" }}
+          {...(growEffect ? { timeout: 4000 } : {})}
+        >
+          <div>
+            <Grid
+              container
+              direction="row"
+              justifyContent="flex-start"
+              alignItems="flex-start"
+              spacing={4}
+              padding={3}
+            >
+              {itemData.map((item) => (
+                <OngoingEvents item={item} />
+              ))}
+            </Grid>
+          </div>
+        </Grow>
         <Paper elevation={7} sqaure={true}>
           <ImageListing />
         </Paper>
