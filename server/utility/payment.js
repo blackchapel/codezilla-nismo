@@ -29,11 +29,13 @@ const create_order = async (req, res) => {
 			amount: req.body.amount,
 			currency: 'INR',
 		};
+		
    		const order = await instance.orders.create(options);
+		
     	if (!order) {
 			return res.status(500).send('Some error occured');
 		}
-    	res.status(200).json({ order });
+    	res.status(200).json(order);
   	} catch (error) {
     	res.status(500).json({ message: error.message });
   	}
