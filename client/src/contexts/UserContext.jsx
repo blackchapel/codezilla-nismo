@@ -6,16 +6,16 @@ export const UserProvider = ({ children }) => {
 
   const [token, setToken] = useState("");
   const [user, setUser] = useState({});
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const setCurrentUser = (token, user) => {
     setToken(token);
     setUser(user);
   }
-  // useEffect((() => {
-  //   if(Object.keys(user).length === 0) setIsLoggedIn(false);
-  //   else setIsLoggedIn(true);
-  // }),[user])
+  useEffect((() => {
+    if(Object.keys(user).length === 0) setIsLoggedIn(false);
+    else setIsLoggedIn(true);
+  }),[user])
 
   console.log(token, user);
   // const [users, setUsers] = useState([]);
@@ -56,6 +56,6 @@ export const UserProvider = ({ children }) => {
   //   setIsLoading(false);
   //   }
   // };
-  return <UserContext.Provider value={{user, token, isLoggedIn, setCurrentUser, setUser}}>{children}</UserContext.Provider>;
+  return <UserContext.Provider value={{user, token, isLoggedIn, setCurrentUser, setUser, setToken}}>{children}</UserContext.Provider>;
 };
 export default UserContext;
