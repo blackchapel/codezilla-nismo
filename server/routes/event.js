@@ -11,7 +11,7 @@ const {
 const router = new express.Router();
 
 router.post('/create', authorizeJWT, createEvent);
-router.get('/view', authorizeJWT, getEvents);
+router.get('/view', getEvents);
 router.put('/join', authorizeJWT, joinEvent);
 
 // Exporting Modules
