@@ -1,21 +1,21 @@
-const GeoIP = require('simple-geoip'); 
-const request = require('request');
+// const GeoIP = require('simple-geoip'); 
+// const request = require('request');
 
-let geoIP = new GeoIP('at_nEGZx2X4Fgjxve5jdjrxasNCi2a35');
-geoIP.lookup('190.2.138.17', (err, data) => {
-   if (err) throw err;
-   console.log(data);
-   const options = {
-        method: 'GET',
-        url: 'https://api.ambeedata.com/latest/by-city',
-        qs: {city: `${data.location.city}`},
-        headers: {'x-api-key': '466280e9807a74f37baae000eb02407180a845bdb4b1d4654c62fd82178e416c', 'Content-type': 'application/json'}
-    };
-    request(options, function (error, response, body) {
-	    if (error) throw new Error(error);
-	    console.log(body);
-    });
-});
+// let geoIP = new GeoIP('at_nEGZx2X4Fgjxve5jdjrxasNCi2a35');
+// geoIP.lookup('190.2.138.17', (err, data) => {
+//    if (err) throw err;
+//    console.log(data);
+//    const options = {
+//         method: 'GET',
+//         url: 'https://api.ambeedata.com/latest/by-city',
+//         qs: {city: `${data.location.city}`},
+//         headers: {'x-api-key': 'c12b6d8549a13d1d4a280adb6e8cb5ef0d0aefc4b126ff4b1d9af895c3be5851', 'Content-type': 'application/json'}
+//     };
+//     request(options, function (error, response, body) {
+// 	    if (error) throw new Error(error);
+// 	    console.log(body);
+//     });
+// });
 // {
 //     "message":"success",
 //     "stations":[
@@ -45,3 +45,26 @@ geoIP.lookup('190.2.138.17', (err, data) => {
 //         }
 //     ]
 // }
+
+// const request = require('request');
+// const options = {
+//   method: 'GET',
+//   url: 'https://api.ambeedata.com/latest/by-city',
+//   qs: {city: 'Bengaluru'},
+//   headers: {'x-api-key': 'c12b6d8549a13d1d4a280adb6e8cb5ef0d0aefc4b126ff4b1d9af895c3be5851', 'Content-type': 'application/json'}
+// };
+// request(options, function (error, response, body) {
+//     if (error) throw new Error(error);
+//     console.log(body);
+// });
+
+// return;
+
+const GeoIP = require('simple-geoip'); 
+const request = require('request');
+
+let geoIP = new GeoIP('at_nEGZx2X4Fgjxve5jdjrxasNCi2a35');
+geoIP.lookup('49.36.117.56', (err, data) => {
+   if (err) throw err;
+   console.log(data);
+});

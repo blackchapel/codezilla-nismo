@@ -15,11 +15,11 @@ const OrderSchema = mongoose.Schema({
 });
 const Order = mongoose.model('Order', OrderSchema);
 
-app.get('/get-razorpay-key', (req, res) => {
+const get_razorpay_key = (req, res) => {
 	res.send({ key: process.env.RAZORPAY_KEY_ID });
-});
+}
 
-app.post('/create-order', async (req, res) => {
+const create_order = async (req, res) => {
 	try {
     	const instance = new Razorpay({
       		key_id: process.env.RAZORPAY_KEY_ID,
@@ -37,9 +37,9 @@ app.post('/create-order', async (req, res) => {
   	} catch (error) {
     	res.status(500).json({ message: error.message });
   	}
-});
+}
 
-app.post('/pay-order', async (req, res) => {
+const pay_order = async (req, res) => {
   try {
         const { amount, razorpayPaymentId, razorpayOrderId, razorpaySignature } = req.body;
         const newOrder = Order({
@@ -58,9 +58,17 @@ app.post('/pay-order', async (req, res) => {
   	} catch(error) {
     	res.status(500).json({ message: error.message });
   	}
-});
+}
 
-app.get('/list-orders', async (req, res) => {
+const list_orders = async (req, res) => {
     const orders = await Order.find();
     res.send(orders);
-});
+};
+
+// Exporting Modules
+module.exports = {
+	get_razorpay_key,
+	create_order,
+	pay_order,
+	list_orders
+}
