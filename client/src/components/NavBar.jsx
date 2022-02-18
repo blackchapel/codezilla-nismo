@@ -11,12 +11,22 @@ import {
   Box,
   ClickAwayListener,
 } from "@mui/material";
+import List from "@mui/material/List";
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import PersonIcon from '@mui/icons-material/Person';
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import InboxIcon from "@mui/icons-material/Inbox";
+import DraftsIcon from "@mui/icons-material/Drafts";
 import Popper from "@mui/material/Popper";
 import PopupState, { bindToggle, bindPopper } from "material-ui-popup-state";
 import Fade from "@mui/material/Fade";
 import Paper from "@mui/material/Paper";
 import { useContext } from "react";
 import UserContext from "../contexts/UserContext";
+import { Navigate } from "react-router-dom";
 function NavBar() {
   const { isLoggedIn, setUser } = useContext(UserContext);
   const [open, setOpen] = useState(false);
@@ -97,22 +107,45 @@ function NavBar() {
             {(popupState) => (
               <div>
                 <Button variant="text" {...bindToggle(popupState)}>
-                  <Avatar />
+                  <Avatar sx={{color: "black"}}/>
                 </Button>
-                <Popper {...bindPopper(popupState)} transition >
+                <Popper
+                  {...bindPopper(popupState)}
+                  transition
+                  sx={{ borderRadius: "10px", marginRight: "20px" }}
+                >
                   {({ TransitionProps }) => (
                     <Fade {...TransitionProps} timeout={350}>
-                        <Grid
-                          container
-                          direction="column"
-                          justifyContent="center"
-                          alignItems="center"
-                        >
-                          <ul style={{ listStyle: "none", backgroundColor: "#1F4910", color: "white" }}>
-                            <Button variant="text" >Sign Out</Button>
-                            <Button variant="text" >My Profile</Button>
-                          </ul>
-                        </Grid>
+                      <Box
+                        sx={{
+                          width: "100%",
+                          maxWidth: 360,
+                          bgcolor: "#1F4910",
+                          borderRadius: "10px"
+                        }}
+                        color="white"
+                      >
+                        <nav aria-label="main mailbox folders">
+                          <List>
+                            <ListItem disablePadding>
+                              <ListItemButton onClick={() => {<Navigate to="/myprofile" replace={true}/>}}>
+                                <ListItemIcon>
+                                  <PersonIcon sx={{color: "white"}}/>
+                                </ListItemIcon>
+                                <ListItemText primary="My Profile" />
+                              </ListItemButton>
+                            </ListItem>
+                            <ListItem disablePadding>
+                              <ListItemButton>
+                                <ListItemIcon>
+                                  <ExitToAppIcon sx={{color: "white"}}/>
+                                </ListItemIcon>
+                                <ListItemText primary="Sign Out" />
+                              </ListItemButton>
+                            </ListItem>
+                          </List>
+                        </nav>
+                      </Box>
                     </Fade>
                   )}
                 </Popper>

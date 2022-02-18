@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const cors = require("cors");
 const db = require('./connection');
 const authRoute = require('./routes/auth'); 
+const payment = require('./routes/payment');
 
 // Initializing an express app
 const app = express();
@@ -19,6 +20,7 @@ app.use(morgan('dev'));
 
 // Routes
 app.use('/api/user', authRoute);
+app.use('/api/payments', payment);
 
 app.get('/api', (req, res) => {
     res.json({ message: "Hello from server!" });
