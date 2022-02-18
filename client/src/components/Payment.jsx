@@ -1,10 +1,12 @@
 import React, {useState} from 'react'
 import {TextField, Button, Box, Container} from "@mui/material"
 import axios from "axios";
+import Helmet from "react-helmet"
 function Payment() {
 
     const [orderAmount, setOrderAmount] = useState("");
     const apiUrl = "http://localhost:5001/api/payments";
+
 
     function loadRazorpay() {
         const script = document.createElement('script');
@@ -15,29 +17,30 @@ function Payment() {
         script.onload = async () => {
           try {
             
-            const result = await axios.post('/create-order', {
+            const result = await axios.post(apiUrl + '/create-order', {
               amount: orderAmount + '00',
             });
             const { amount, id: order_id, currency } = result.data;
+            console.log(amount);
             const {
               data: { key: razorpayKey },
-            } = await axios.get('/get-razorpay-key');
+            } = await axios.get(apiUrl + '/get-razorpay-key');
     
             const options = {
               key: razorpayKey,
               amount: amount.toString(),
               currency: currency,
-              name: 'Climate Warriors',
-              description: 'Donate to Climate Warriors',
+              name: 'Avni Clan',
+              description: 'Donate any amount towards a greener future',
               order_id: order_id,
               handler: async function (response) {
-                const result = await axios.post('/pay-order', {
+                const result = await axios.post(apiUrl + '/pay-order', {
                   amount: amount,
                   razorpayPaymentId: response.razorpay_payment_id,
                   razorpayOrderId: response.razorpay_order_id,
                   razorpaySignature: response.razorpay_signature,
                 });
-                alert(result.data.msg);
+                alert(result.data.message);
                
               },
               theme: {
@@ -67,6 +70,8 @@ function Payment() {
         <Button onClick={loadRazorpay} variant="contained">
           Pay now
         </Button>
+              
+        
     </Box>
     </Container>
   )
