@@ -16,8 +16,8 @@ const signup = async (req, res) => {
         const emailOtp = generateotp(6);
 
         // Saving the OTP in database
-        newUser.phoneOTP = phoneOtp;
-        newUser.emailOTP = emailOtp;
+        newUser.phoneotp = phoneOtp;
+        newUser.emailotp = emailOtp;
         await newUser.save();
 
         // Sending the otp through sms
@@ -26,27 +26,22 @@ const signup = async (req, res) => {
             contactNumber: newUser.phone,
             phoneOtp
         });
-        console.log(1);
+
         // Sending the otp through email
         await sendEmail ({
             message: `Dear User, your OTP for registration is ${emailOtp}`,
             emailId: newUser.email,
             emailOtp
         });
-        console.log(2);
+
         // Sending a response back
-        res.status(200).json({
-            message: "OTPs sent to Email and Phone",
+        res.status(201).json({
+            message: 'OTPs sent to Email and Phone',
             data: {
-            userID: newUser._id,
-            token
+                userID: newUser._id,
+                token
             },
         });
-
-        // res.status(201).json({
-        //     message: 'Account Successfully Created!',
-        //     data: { token }
-        // });
     } catch(error) {
         res.status(400).json({
             message: error.message
@@ -66,7 +61,7 @@ const login = async (req, res) => {
 
         const isMatch = await bcryptjs.compare(req.body.password, user.password);
         if(!isMatch) {
-            res.status(403).json({
+            res.status(401).json({
                 message: 'Invalid credentials!'
             });
         }
@@ -76,7 +71,7 @@ const login = async (req, res) => {
         user = removeSensitiveData(user);
 
         res.status(200).json({
-            message: "User verified!",
+            message: 'User verified!',
             data: { user, token }
         });
     } catch(error) {
