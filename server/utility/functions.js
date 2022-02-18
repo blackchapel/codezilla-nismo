@@ -10,5 +10,24 @@ const removeSensitiveData = (data) => {
     return data;
 };
 
+// Remove unnecessary data
+const removeUnnecessaryData = (data) => {
+    let stations = data.stations[0];
+    stations._id = undefined;
+    stations.placeId = undefined;
+    stations.countryCode = undefined;
+    stations.division = undefined;
+    stations.lat = undefined;
+    stations.lng = undefined;
+    stations.placeName = undefined;
+    stations.postalCode = undefined;
+    stations.state = undefined;
+    stations.updatedAt = undefined;
+    return stations;
+};
+
 // Exporting Modules
-module.exports = removeSensitiveData;
+module.exports = {
+    removeSensitiveData,
+    removeUnnecessaryData
+};
