@@ -46,8 +46,8 @@ function Home() {
   return (
     <Fragment>
       <GlobalStyles
-          styles={{ ul: { margin: 0, padding: 0, listStyle: "none" } }}
-        />
+        styles={{ ul: { margin: 0, padding: 0, listStyle: "none" } }}
+      />
       <Stack
         direction="column"
         justifyContent="flex-start"
@@ -84,21 +84,27 @@ function Home() {
             </Grid>
           </Grid>
         </Grow>
-        <div>
-          <Grid
-            container
-            direction="row"
-            justifyContent="flex-start"
-            alignItems="flex-start"
-            spacing={4}
-            marginTop={2}
-            marginBottom={2}
+          <Grow
+            in={growEffect}
+            style={{ transformOrigin: "0 0 0" }}
+            {...(growEffect ? { timeout: 4000 } : {})}
           >
-            {itemData.map((item) => (
-              <OngoingEvents item={item} />
-            ))}
-          </Grid>
-        </div>
+            <div>
+              <Grid
+                container
+                direction="row"
+                justifyContent="flex-start"
+                alignItems="flex-start"
+                spacing={4}
+                marginTop={2}
+                marginBottom={2}
+              >
+                {itemData.map((item) => (
+                  <OngoingEvents item={item} />
+                ))}
+              </Grid>
+            </div>
+          </Grow>
         <Paper elevation={7} sqaure={true}>
           <ImageListing />
         </Paper>
