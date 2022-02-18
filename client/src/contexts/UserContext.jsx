@@ -1,18 +1,22 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 const UserContext = createContext();
-const api_url = process.env.REACT_APP_GITHUB_API_URL;
-const token = process.env.REACT_APP_GITHUB_TOKEN;
 
 export const UserProvider = ({ children }) => {
 
   const [token, setToken] = useState("");
   const [user, setUser] = useState({});
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   const setCurrentUser = (token, user) => {
     setToken(token);
     setUser(user);
   }
+  // useEffect((() => {
+  //   if(Object.keys(user).length === 0) setIsLoggedIn(false);
+  //   else setIsLoggedIn(true);
+  // }),[user])
+
   console.log(token, user);
   // const [users, setUsers] = useState([]);
   // const [isLoading, setIsLoading] = useState(false);
@@ -52,6 +56,6 @@ export const UserProvider = ({ children }) => {
   //   setIsLoading(false);
   //   }
   // };
-  return <UserContext.Provider value={{user, token, setCurrentUser}}>{children}</UserContext.Provider>;
+  return <UserContext.Provider value={{user, token, isLoggedIn, setCurrentUser, setUser}}>{children}</UserContext.Provider>;
 };
 export default UserContext;
