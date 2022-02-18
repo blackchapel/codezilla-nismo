@@ -17,18 +17,28 @@ import MenuItem from "@mui/material/MenuItem";
 import { FormControl } from "@mui/material";
 
 export default function CreateEvent() {
+  const [category, setCategory] = React.useState("Planting Trees");
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    let credits = category.slice(-2);
+    let cat = category.substring(0,(category.length - 2));
     // eslint-disable-next-line no-console
 
     console.log({
-      email: data.get("email"),
-      password: data.get("password"),
+      eventname: data.get("eventname"),
+      activity: data.get("activity"),
+      details: data.get("details"),
+      date: data.get("date"),
+      starttime: data.get("starttime"),
+      endtime: data.get("endtime"),
+      category: cat,
+      location: data.get("location"),
+      pincode: data.get("pincode"),
+      credits: credits,
     });
   };
-  const [category, setCategory] = React.useState("Planting Trees");
-
+  
   const handleChange = (event) => {
     setCategory(event.target.value);
   };
@@ -115,7 +125,8 @@ export default function CreateEvent() {
             >
               <Grid item>
                 <TextField
-                  id="datetime-local"
+                  id="date"
+                  name="date"
                   label="Date"
                   type="date"
                   // type="datetime-local"
@@ -128,8 +139,9 @@ export default function CreateEvent() {
               </Grid>
               <Grid item>
                 <TextField
-                  id="datetime-local"
-                  label="Start"
+                  id="starttime"
+                  name="starttime"
+                  label="StartTime"
                   type="time"
                   // type="datetime-local"
                   // defaultValue="2017-05-24"
@@ -141,8 +153,9 @@ export default function CreateEvent() {
               </Grid>
               <Grid item>
                 <TextField
-                  id="datetime-local"
-                  label="End"
+                  id="endtime"
+                  name="endtime"
+                  label="EndTime"
                   type="time"
                   // type="datetime-local"
                   // defaultValue="2017-05-24"
@@ -157,7 +170,8 @@ export default function CreateEvent() {
             <InputLabel id="demo-simple-select-label">Category</InputLabel>
             <Select
               labelId="demo-simple-select-label"
-              id="demo-simple-select"
+              id="category"
+              name="category"
               value={category}
               defaultValue={"Planting Trees"}
               onChange={handleChange}
@@ -200,7 +214,41 @@ export default function CreateEvent() {
                 Rainwater harvesting
               </MenuItem>
             </Select>
-
+            <Grid
+              container
+              direction="row"
+              justifyContent="flex-start"
+              alignItems="center"
+              spacing={2}
+            >
+              <Grid item><TextField
+                  id="location"
+                  name="location"
+                  label="Location"
+                  type="text"
+                  // type="datetime-local"
+                  // defaultValue="2017-05-24"
+                  sx={{ width: "600px", marginTop: "20px", marginBottom: "20px" }}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                /></Grid>
+              <Grid item>
+              <TextField
+                  id="pincode"
+                  name="pincode"
+                  label="Pincode"
+                  type="text"
+                  // type="datetime-local"
+                  // defaultValue="2017-05-24"
+                  sx={{ marginTop: "20px", marginBottom: "20px" }}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </Grid>
+            </Grid>
+            
             <Button
               type="submit"
               fullWidth
