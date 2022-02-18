@@ -1,7 +1,7 @@
 // Importing modules
 const User = require('../models/user');
 const { generateotp, sendSMS, sendEmail } = require("../utility/otp.js");
-const removeSensitiveData = require('../utility/functions');
+const { removeSensitiveData } = require('../utility/functions');
 const bcryptjs = require('bcryptjs');
 
 // Signup
