@@ -12,6 +12,7 @@ import CreateTeam from "./components/CreateTeam";
 import CreateEvent from "./components/CreateEvent";
 import Payment from "./components/Payment";
 import Footer from "./layout/Footer";
+import { WebcamStreamCapture } from "./components/WebcamStreamCapture";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { UserProvider } from "./contexts/UserContext";
@@ -50,6 +51,7 @@ function App() {
             <Route path="/createEvent" element={<CreateEvent />} />
             <Route path="/createTeam" element={<CreateTeam />} />
             <Route path="/donate" element={<Payment />} />
+            <Route path="/webcam" element={<WebcamStreamCapture />} />
             
           </Routes>
           <Footer />
