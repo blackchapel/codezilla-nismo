@@ -22,7 +22,7 @@ const sendSMS = async ({ message, contactNumber }) => {
             message,
             numbers: [contactNumber]
         });
-        console.log(res);
+        console.log('SMS sent successfully');
     } catch(error) {
         res.status(400).json({
             message: error.message
@@ -34,7 +34,7 @@ const sendSMS = async ({ message, contactNumber }) => {
 // Sending OTP via mail
 const sendEmail = async ({ message, emailId }) => {
     try {
-        console.log('first');
+ 
         let transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
@@ -46,27 +46,26 @@ const sendEmail = async ({ message, emailId }) => {
               refreshToken: process.env.OAUTH_REFRESH_TOKEN
             }
           });
-        console.log("second");
+
         let mailOptions = {
-            from: "socialmigraine@gmail.com",
+            from: 'socialmigraine@gmail.com',
             to: emailId,
-            subject: "OTP for Signup Verification",
+            subject: 'OTP for Signup Verification',
             text: message
         };
-        console.log('third');
+
         transporter.sendMail(mailOptions, function (error, data) {
             if(error) {
-                console.log("Error " + error);
+                console.log('Error ' + error);
             } else {
-                console.log("Email sent successfully");
+                console.log('Email sent successfully');
             }
         });
-        console.log('fourth');
+    
     } catch(error) {
         res.json({
             message: error.message,
         });
-        console.log(error);
     }
 };
 
