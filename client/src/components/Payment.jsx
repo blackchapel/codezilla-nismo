@@ -4,7 +4,7 @@ import axios from "axios";
 function Payment() {
 
     const [orderAmount, setOrderAmount] = useState("");
-    const apiUrl = "http://localhost:5001/api/payment";
+    const apiUrl = "http://localhost:5001/api/payments";
 
     function loadRazorpay() {
         const script = document.createElement('script');
