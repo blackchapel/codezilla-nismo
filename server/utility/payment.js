@@ -16,14 +16,14 @@ const OrderSchema = mongoose.Schema({
 const Order = mongoose.model('Order', OrderSchema);
 
 const get_razorpay_key = (req, res) => {
-	res.send({ key: process.env.RAZORPAY_KEY_ID });
+	res.status(200).json({ key: process.env.RAZORPAY_KEYID });
 }
 
 const create_order = async (req, res) => {
 	try {
     	const instance = new Razorpay({
-      		key_id: process.env.RAZORPAY_KEY_ID,
-      		key_secret: process.env.RAZORPAY_SECRET,
+      		key_id: process.env.RAZORPAY_KEYID,
+      		key_secret: process.env.RAZORPAY_KEY_SECRET,
     	});
 		const options = {
 			amount: req.body.amount,
