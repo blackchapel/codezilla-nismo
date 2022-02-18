@@ -29,9 +29,16 @@ export const loginPost = async (formData) => {
   }
 };
 
-export const verifyEmailOtp = async (formData) => {
+export const verifySignupOtp = async (formData, token) => {
   try {
-    const { data } = await axios.post(apiUrl + "user/authenticate/emailotp", formData);
+    console.log(token);
+    const { data } = await axios.put(apiUrl + "user/otp", formData, {
+      headers: {
+        "Authorization" : `Bearer ${token}`
+      }
+
+    });
+
     console.log(data);
     if (data)
     {return data};
@@ -39,19 +46,25 @@ export const verifyEmailOtp = async (formData) => {
     throw err;
   }
 };
-export const verifyPhoneOtp = async (formData) => {
-  try {
-    const { data } = await axios.post( apiUrl + "user/authenticate/phoneotp",
-      formData
-    );
-    console.log(data);
-    if (data) {
-      return data;
-    }
-  } catch (err) {
-    throw err;
-  }
-};
+
+// export const verifyPhoneOtp = async (formData) => {
+//   try {
+//     const { data } = await axios.put( apiUrl + "user/authenticate/phoneotp",
+//       formData
+//     );
+//     console.log(data);
+//     if (data) {
+//       return data;
+//     }
+//   } catch (err) {
+//     throw err;
+//   }
+// };
+
+export const setUpAxiosHeader = (token) => {
+  axios.defaults.headers.common['Authorization'] = `Bearer ${token}` 
+}
+
 export const verifyLoginOtp = async (formData) => {
   try {
     const { data } = await axios.post(
