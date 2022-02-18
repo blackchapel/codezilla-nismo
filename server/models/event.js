@@ -1,5 +1,6 @@
 // Importing modules
 const mongoose = require('mongoose');
+const User = require('./user');
 
 // Creating the schema
 const eventSchema = new mongoose.Schema(
@@ -11,6 +12,12 @@ const eventSchema = new mongoose.Schema(
             unique: true
         },
 
+        description: {
+            type: String,
+            required: true,
+            trim: true,
+        },
+
         activity: {
             type: String,
             required: true,
@@ -18,25 +25,39 @@ const eventSchema = new mongoose.Schema(
             unique: true
         },
 
-        location: {
+        date: {
             type: String,
             required: true,
-            trim: true,
-            unique: true
+            trim: true
         },
 
         starttime: {
             type: String,
             required: true,
-            trim: true,
-            unique: true
+            trim: true
         },
 
         endtime: {
             type: String,
             required: true,
-            trim: true,
-            unique: true
+            trim: true
+        },
+
+        address: {
+            type: String,
+            required: true,
+            trim: true
+        },
+
+        pincode: {
+            type: Number,
+            required: true,
+            trim:true
+        },
+
+        eventhost: {
+            type: [mongoose.Schema.Types.ObjectId],
+            ref: 'User'
         }
     },
     {timestamps: true}
