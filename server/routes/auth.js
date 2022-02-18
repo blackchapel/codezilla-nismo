@@ -17,7 +17,6 @@ router.post('/login', login);
 router.put('/logout', authorizeJWT, logout);
 router.put('/logoutall', authorizeJWT, logoutall);
 router.put('/otp', authorizeJWT, verifyotps);
-// router.post('/otp-email', authorizeJWT, verifyEmailOTP);
 
 // Exporting Modules
 module.exports = router;

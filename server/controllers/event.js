@@ -21,7 +21,44 @@ const createEvent = async (req, res) => {
     }
 }
 
+// Get Events
+const getEvents = async (req, res) => {
+    try {
+        let events = await Event.find().populate();
+        res.status(200).json({
+            data: events
+        });
+    } catch(error) {
+        res.status(400).json({
+            message: error.message
+        });
+    }
+};
+
+// Join Event 
+const joinEvent = async (req, res) => {
+    try {
+        let event = await Event.findById(req.body.eventid);
+        let userid = req.user._id;
+
+        if(!event) {
+            res.status(404).json({
+                message: 'Event Not Found!',
+            });
+        }
+
+        event.membersjoined.push({ userid });
+        await event.save();
+    } catch(error) {
+        res.status(400).json({
+            message: error.message
+        });
+    }
+};
+
 // Exporting modules
 module.exports = {
-    createEvent
+    createEvent,
+    getEvents,
+    joinEvent
 };
