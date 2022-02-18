@@ -1,6 +1,6 @@
 // Importing Modules
 const User = require('../models/user');
-const removeSensitiveData = require('../utility/functions');
+const { removeSensitiveData, removeUnnecessaryData } = require('../utility/functions');
 
 // Phone OTP Verification 
 const verifyotps = async (req, res) => {
