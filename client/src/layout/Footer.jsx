@@ -16,7 +16,7 @@ function Footer() {
         elevation={7}
         square={true}
         sx={{
-          backgroundColor: "#8fd071",
+          backgroundColor: "#242526",
           padding: "10px",
         }}
       >
@@ -35,13 +35,13 @@ function Footer() {
               alignItems="center"
             >
               <Grid item style={{ fontSize: "50px" }}>
-                <FaGithub />
+                <FaGithub color="white"/>
               </Grid>
               <Grid item>
-                <ButtonGroup variant="text">
+                <ButtonGroup variant="text" >
                   <Button>
                     <a
-                      href="https://github.com/Yashpb1513"
+                      href="https://github.com/blackchapel"
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -59,7 +59,7 @@ function Footer() {
                   </Button>
                   <Button>
                     <a
-                      href="https://github.com/Yashpb1513"
+                      href="https://github.com/vidhitapai"
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -68,7 +68,7 @@ function Footer() {
                   </Button>
                   <Button>
                     <a
-                      href="https://github.com/Yashpb1513"
+                      href="https://github.com/rosita-dmello"
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -87,7 +87,7 @@ function Footer() {
               alignItems="center"
             >
               <Grid item style={{ fontSize: "50px" }}>
-                <FaLinkedin />
+                <FaLinkedin color="white"/>
               </Grid>
               <Grid item>
                 <ButtonGroup variant="text">

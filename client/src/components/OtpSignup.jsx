@@ -10,18 +10,30 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
+import { verifySignupOtp } from '../data/api';
+import { useContext, useState } from 'react';
+import UserContext from '../contexts/UserContext';
+import { Navigate } from "react-router-dom";
+
+
 
 const theme = createTheme();
 
 export default function OtpSignup() {
-  const handleSubmit = (event) => {
+  const [successfulSignup, setSuccessfulSignup] = useState(false);
+  const {user, token, setCurrentUser} = useContext(UserContext);
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
-    console.log({
-      emailOtp: data.get('emailOtp'),
-      passwordOtp: data.get('phoneOtp'),
-    });
+    const response = await verifySignupOtp({
+      checkEmailOTP: data.get('emailOtp'),
+      checkPhoneOTP: data.get('phoneOtp'),
+      userid: user.userID
+    }, token);
+   
+    setCurrentUser(response.data.token, response.data.user);
+    setSuccessfulSignup(true);
   };
 
   return (
@@ -33,6 +45,7 @@ export default function OtpSignup() {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+            marginBottom: 19
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
@@ -68,7 +81,9 @@ export default function OtpSignup() {
               Verify
             </Button>
           </Box>
+        
         </Box>
+        {successfulSignup && <Navigate to="/dashboard" replace={true}/>}
       </Container>
    
   );

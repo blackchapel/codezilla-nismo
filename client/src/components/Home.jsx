@@ -45,15 +45,15 @@ function Home() {
   const growEffect = true;
   return (
     <Fragment>
-      <GlobalStyles
-          styles={{ ul: { margin: 0, padding: 0, listStyle: "none" } }}
-        />
+          <GlobalStyles
+        styles={{ ul: { margin: 0, padding: 0, listStyle: "none" }, body: {margin: 0} }}
+      />
       <Stack
         direction="column"
         justifyContent="flex-start"
         alignItems="stretch"
         spacing={0}
-        sx={{ marginTop: "30px", marginRight: "0px", width: "100%" }}
+        sx={{ marginRight: "0px", width: "100%" }}
       >
         {/* {(window.innerWidth >= 700) ? <div><Zoom in="true" style={{ transitionDelay: "700ms", transitionTimingFunction: "ease-out"}}>
         <img src="https://wallpapercave.com/wp/wp7510787.jpg" alt="image" height="350px" width={window.innerWidth} style={{opacity: '0.6', marginRight: '0px'}}/>
@@ -84,25 +84,30 @@ function Home() {
             </Grid>
           </Grid>
         </Grow>
-        <div>
-          <Grid
-            container
-            direction="row"
-            justifyContent="flex-start"
-            alignItems="flex-start"
-            spacing={4}
-            marginTop={2}
-            marginBottom={2}
+          <Grow
+            in={growEffect}
+            style={{ transformOrigin: "0 0 0" }}
+            {...(growEffect ? { timeout: 4000 } : {})}
           >
-            {itemData.map((item) => (
-              <OngoingEvents item={item} />
-            ))}
-          </Grid>
-        </div>
+            <div>
+              <Grid
+                container
+                direction="row"
+                justifyContent="flex-start"
+                alignItems="flex-start"
+                spacing={4}
+                padding={3}
+              >
+                {itemData.map((item) => (
+                  <OngoingEvents item={item} />
+                ))}
+              </Grid>
+            </div>
+          </Grow>
         <Paper elevation={7} sqaure={true}>
           <ImageListing />
         </Paper>
-        <div style={{ marginTop: "10px" }}>
+        <div style={{ padding: "30px" }}>
           <Typography variant="h5" color="secondary">
             Leaderboard
           </Typography>
