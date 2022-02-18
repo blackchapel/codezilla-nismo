@@ -1,6 +1,6 @@
 // Importing modules
 const User = require('../models/user');
-const { generateotp, sendSMS, sendEmail} = require("../utility/otp.js");
+const { generateotp, sendSMS, sendEmail } = require("../utility/otp.js");
 const removeSensitiveData = require('../utility/functions');
 const bcryptjs = require('bcryptjs');
 
@@ -71,7 +71,7 @@ const login = async (req, res) => {
         user = removeSensitiveData(user);
 
         res.status(200).json({
-            message: 'User verified!',
+            message: 'User Verified!',
             data: { user, token }
         });
     } catch(error) {
