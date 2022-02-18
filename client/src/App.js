@@ -10,6 +10,7 @@ import OtpSignup from "./components/OtpSignup";
 import Signup from "./components/Signup";
 import CreateTeam from "./components/CreateTeam";
 import CreateEvent from "./components/CreateEvent";
+import Payment from "./components/Payment";
 import Footer from "./layout/Footer";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -48,6 +49,8 @@ function App() {
             <Route path="/myprofile" element={<MyProfile />} />
             <Route path="/createEvent" element={<CreateEvent />} />
             <Route path="/createTeam" element={<CreateTeam />} />
+            <Route path="/donate" element={<Payment />} />
+            
           </Routes>
           <Footer />
         </BrowserRouter>
