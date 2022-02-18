@@ -12,6 +12,10 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import {loginPost} from "../data/api";
+import { useContext } from 'react';
+import UserContext from '../contexts/UserContext';
+import { Navigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -28,18 +32,30 @@ function Copyright(props) {
 
 
 
-export default function SignInSide() {
-  const handleSubmit = (event) => {
+export default function Login() {
+
+  const {setCurrentUser, token, user} = useContext(UserContext);
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+    
+    try {
+      const response = await loginPost({
+        email: data.get('email'),
+        password: data.get('password'),
+      });
+      setCurrentUser(response.data.token, response.data.user);
+    }
+    catch(err) {
+      console.log(err);
+    }
+    
+    
+     };
 
-  return (<Grid container component="main" sx={{ height: '100vh' }}>
+  return (<Box>
+  <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
         <Grid
           item
@@ -103,12 +119,12 @@ export default function SignInSide() {
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="/forgotpassword" variant="body2">
+                  <Link href="/forgotpassword" variant="body2" color="secondary">
                     Forgot password?
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="/signup" variant="body2">
+                  <Link href="/signup" variant="body2" color="secondary">
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>
@@ -117,7 +133,9 @@ export default function SignInSide() {
             </Box>
           </Box>
         </Grid>
+        
       </Grid>
-   
+      {token.length !=0 && <Navigate to="/dashboard" replace={true}/>}
+      </Box>
   );
 }
