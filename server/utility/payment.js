@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 const Razorpay = require('razorpay');
 const dotenv = require('dotenv').config();
-const app = express();
+
 
 const OrderSchema = mongoose.Schema({
 	isPaid: Boolean,

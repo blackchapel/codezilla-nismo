@@ -10,10 +10,10 @@ const {
 // Initializing router
 const router = new express.Router();
 
-app.get('/get-razorpay-key', get_razorpay_key);
-app.post('/create-order', create_order);
-app.post('/pay-order', pay_order);
-app.get('/list-orders', list_orders);
+router.get('/get-razorpay-key', get_razorpay_key);
+router.post('/create-order', create_order);
+router.post('/pay-order', pay_order);
+router.get('/list-orders', list_orders);
 
 // Exporting Modules
 module.exports = router;
