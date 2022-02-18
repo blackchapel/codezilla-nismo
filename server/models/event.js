@@ -27,38 +27,43 @@ const eventSchema = new mongoose.Schema(
 
         date: {
             type: String,
-            required: true,
+            //required: true,
             trim: true
         },
 
         starttime: {
             type: String,
-            required: true,
+            //required: true,
             trim: true
         },
 
         endtime: {
             type: String,
-            required: true,
+            //required: true,
             trim: true
         },
 
         address: {
             type: String,
-            required: true,
+            //required: true,
             trim: true
         },
 
         pincode: {
             type: Number,
-            required: true,
+            //required: true,
             trim:true
         },
 
         eventhost: {
             type: [mongoose.Schema.Types.ObjectId],
             ref: 'User'
-        }
+        },
+
+        membersjoined: [{
+            type: [mongoose.Schema.Types.ObjectId],
+            ref: 'User'
+        }]
     },
     {timestamps: true}
 );

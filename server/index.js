@@ -6,6 +6,7 @@ const db = require('./connection');
 const authRoute = require('./routes/auth'); 
 const payment = require('./routes/payment');
 const apidata = require('./routes/api');
+const events = require('./routes/event');
 
 // Initializing an express app
 const app = express();
@@ -23,6 +24,7 @@ app.use(morgan('dev'));
 app.use('/api/user', authRoute);
 app.use('/api/payments', payment);
 app.use('/api/data', apidata);
+app.use('/api/event', events);
 
 app.get('/api', (req, res) => {
     res.json({ message: "Hello from server!" });
