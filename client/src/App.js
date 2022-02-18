@@ -8,7 +8,10 @@ import MyProfile from "./components/MyProfile";
 import NavBar from "./components/NavBar";
 import OtpSignup from "./components/OtpSignup";
 import Signup from "./components/Signup";
+import CreateTeam from "./components/CreateTeam";
+import CreateEvent from "./components/CreateEvent";
 import Footer from "./layout/Footer";
+
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { UserProvider } from "./contexts/UserContext";
 
@@ -43,6 +46,8 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/otpverification" element={<OtpSignup />} />
             <Route path="/myprofile" element={<MyProfile />} />
+            <Route path="/createEvent" element={<CreateEvent />} />
+            <Route path="/createTeam" element={<CreateTeam />} />
           </Routes>
           <Footer />
         </BrowserRouter>
