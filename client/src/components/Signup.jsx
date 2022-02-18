@@ -11,10 +11,9 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import MuiPhoneNumber from "material-ui-phone-number";
+import {signupPost} from "../data/api"
 
-// import signupImage from "/images/Signup.png"
 
 function Copyright(props) {
   return (
@@ -31,18 +30,24 @@ function Copyright(props) {
 
 
 export default function SignInSide() {
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+
     // eslint-disable-next-line no-console
-    console.log({
+    const phoneEntry = data.get('phone');
+    let phone = phoneEntry.replace(/-|\s/g,"");
+    phone = phone.substring(3);
+    const response = await signupPost({
       email: data.get('email'),
       password: data.get('password'),
-      phone: data.get('phone'),
+      phone,
       name: data.get('firstName') + " " + data.get('lastName'),
-      allowExtraEmails: data.get('allowExtraEmails')
 
     });
+    console.log(response);
+
+
   };
  
 
@@ -119,7 +124,8 @@ export default function SignInSide() {
                     defaultCountry={"in"}
                     onChange={(val) => console.log(val)}
                     variant="outlined"
-                    regions={['america', 'europe', 'asia', 'oceania', 'africa']}
+                    regions={['america','asia']}
+                    
                   />
               </Grid>
               <Grid item xs={12}>
