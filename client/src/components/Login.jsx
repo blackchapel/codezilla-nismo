@@ -13,9 +13,9 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {loginPost} from "../data/api";
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import UserContext from '../contexts/UserContext';
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -33,27 +33,33 @@ function Copyright(props) {
 
 
 export default function Login() {
-
-  const {setCurrentUser, token, user} = useContext(UserContext);
+  const navigate = useNavigate();
+  const [navUser, setNavUser] = useState({});
+  const {setCurrentUser, token, user, setUser, setToken, setIsLoggedIn} = useContext(UserContext);
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
     
-    try {
+    
       const response = await loginPost({
         email: data.get('email'),
         password: data.get('password'),
       });
-      setCurrentUser(response.data.token, response.data.user);
-    }
-    catch(err) {
-      console.log(err);
-    }
+      setIsLoggedIn(true);
+      setUser(response.data.user);
+      setToken(response.data.token);
+      localStorage.setItem("user", response.data.user);
+      localStorage.setItem("token", response.data.token);
+      navigate("/dashboard", {replace: true});
+      
+      console.log(response.data.user);
     
+  
+   
     
      };
-
+     
   return (<Box>
   <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
@@ -135,7 +141,7 @@ export default function Login() {
         </Grid>
         
       </Grid>
-      {token.length !=0 && <Navigate to="/dashboard" replace={true}/>}
+      
       </Box>
   );
 }

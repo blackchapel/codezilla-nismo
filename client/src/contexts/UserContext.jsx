@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useCallback, useMemo } from "react";
 
 const UserContext = createContext();
 
@@ -8,16 +8,32 @@ export const UserProvider = ({ children }) => {
   const [user, setUser] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const setCurrentUser = (token, user) => {
-    setToken(token);
-    setUser(user);
+  const setCurrentUser = (receivedToken, receivedUser) => {
+    setToken(receivedToken);
+    setUser(receivedUser);
   }
   useEffect((() => {
-    if(Object.keys(user).length === 0) setIsLoggedIn(false);
-    else setIsLoggedIn(true);
-  }),[user])
+    setUser(localStorage.getItem("user"));
+    setToken(localStorage.getItem("token"));
+    if(localStorage.getItem("user") != "") {setIsLoggedIn(true)}
+    else {setIsLoggedIn(false)};
+    
+  }),[])
 
-  console.log(token, user);
+  // const signout = useCallback(() => {
+  //   setUser(null);
+  // }, []);
+
+
+  
+
+  // memoize the full context value
+  // const contextValue = useMemo(() => ({
+  //   user,
+  //   signout
+  // }), [user, signout])
+
+  
   // const [users, setUsers] = useState([]);
   // const [isLoading, setIsLoading] = useState(false);
   // const [us, setUs] = useState([]);
@@ -56,6 +72,6 @@ export const UserProvider = ({ children }) => {
   //   setIsLoading(false);
   //   }
   // };
-  return <UserContext.Provider value={{user, token, isLoggedIn, setCurrentUser, setUser, setToken}}>{children}</UserContext.Provider>;
+  return <UserContext.Provider value={{user, token, isLoggedIn, setCurrentUser, setUser, setToken, setIsLoggedIn}}>{children}</UserContext.Provider>;
 };
 export default UserContext;

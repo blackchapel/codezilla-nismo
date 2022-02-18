@@ -24,11 +24,12 @@ import Popper from "@mui/material/Popper";
 import PopupState, { bindToggle, bindPopper } from "material-ui-popup-state";
 import Fade from "@mui/material/Fade";
 import Paper from "@mui/material/Paper";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import UserContext from "../contexts/UserContext";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate} from "react-router-dom";
 function NavBar() {
-  const { isLoggedIn, setUser, setToken } = useContext(UserContext);
+  const { isLoggedIn, user, setUser, setToken, setCurrentUser } = useContext(UserContext);
+  const navigate = useNavigate();
   const navItemStyle = {
     textDecoration: "none",
     my: 1,
@@ -38,6 +39,10 @@ function NavBar() {
       color: "text.secondary",
     },
   };
+  useEffect(() => {
+    console.log(isLoggedIn);
+  }, [])
+
   return (
     <div>
       <AppBar
@@ -57,16 +62,14 @@ function NavBar() {
             </Typography>
           </Link>
           <nav>
-            {isLoggedIn ? (
-              <Link
+            <Link
                 variant="button"
                 color="text.primary"
-                to="/dashboard"
+                href="/dashboard"
                 sx={navItemStyle}
               >
                 Dashboard
               </Link>
-            ) : (
               <Link
                 variant="button"
                 color="text.primary"
@@ -75,15 +78,7 @@ function NavBar() {
               >
                 About us
               </Link>
-            )}
-            <Link
-              variant="button"
-              color="text.primary"
-              href="/about"
-              sx={navItemStyle}
-            >
-              About us
-            </Link>
+            
             <Link
               variant="button"
               color="text.primary"
@@ -92,9 +87,10 @@ function NavBar() {
             >
               Contact us
             </Link>
+            
           </nav>
-          {isLoggedIn ? (
-            <PopupState variant="popper" popupId="demo-popup-popper">
+            
+          {isLoggedIn ?  <PopupState variant="popper" popupId="demo-popup-popper">
               {(popupState) => (
                 <div>
                   <Button variant="text" {...bindToggle(popupState)}>
@@ -137,9 +133,12 @@ function NavBar() {
                               </ListItem>
                               <ListItem disablePadding>
                                 <ListItemButton
-                                  onClick={() => {
+                                  onClick={(event) => {
                                     setUser({});
                                     setToken("");
+                                    localStorage.setItem("user", "");
+                                    localStorage.setItem("token", "");
+                                    navigate("/", {replace: true});
                                   }}
                                 >
                                   <ListItemIcon>
@@ -156,20 +155,19 @@ function NavBar() {
                   </Popper>
                 </div>
               )}
-            </PopupState>
-          ) : (
-            <Button
+            </PopupState> : <Button
               href="/login"
               variant="contained"
               sx={{ my: 1, mx: 1.5 }}
               color="secondary"
             >
               Login
-            </Button>
-          )}
+            </Button>}
+           
+        
         </Toolbar>
       </AppBar>
-      {/* {toMyProfile && <Navigate to="/myprofile" replace={true} />} */}
+      
     </div>
   );
 }

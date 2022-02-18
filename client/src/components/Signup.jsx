@@ -15,7 +15,7 @@ import MuiPhoneNumber from "material-ui-phone-number";
 import {signupPost} from "../data/api"
 import { useContext } from 'react';
 import UserContext from '../contexts/UserContext';
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -33,8 +33,8 @@ function Copyright(props) {
 
 export default function SignInSide() {
 
-  const {setCurrentUser, token, user} = useContext(UserContext);
-
+  const {setCurrentUser, token, user, isLoggedIn, setIsLoggedIn} = useContext(UserContext);
+  const navigate = useNavigate();
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -52,7 +52,9 @@ export default function SignInSide() {
         name: data.get('firstName') + " " + data.get('lastName'),
   
       });
+      
       setCurrentUser(response.data.token, {userID: response.data.userID});
+      navigate("/otpverification", {replace: true});
     }
     catch(err) {
       console.log(err);
@@ -182,7 +184,7 @@ export default function SignInSide() {
           </Box>
         </Grid>
       </Grid>
-      {token.length !=0 && <Navigate to="/otpverification" replace={true}/>}
+      
     </Box>
   );
 }

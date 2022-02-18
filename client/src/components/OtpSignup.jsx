@@ -13,15 +13,16 @@ import DoneAllIcon from '@mui/icons-material/DoneAll';
 import { verifySignupOtp } from '../data/api';
 import { useContext, useState } from 'react';
 import UserContext from '../contexts/UserContext';
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 
 
 const theme = createTheme();
 
 export default function OtpSignup() {
-  const [successfulSignup, setSuccessfulSignup] = useState(false);
-  const {user, token, setCurrentUser} = useContext(UserContext);
+ 
+  const navigate = useNavigate();
+  const {user, token, setCurrentUser, setIsLoggedIn} = useContext(UserContext);
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -31,9 +32,12 @@ export default function OtpSignup() {
       checkPhoneOTP: data.get('phoneOtp'),
       userid: user.userID
     }, token);
-   
+    setIsLoggedIn(true);
+    localStorage.setItem("user", response.data.user);
+    localStorage.setItem("token", response.data.token);
     setCurrentUser(response.data.token, response.data.user);
-    setSuccessfulSignup(true);
+    navigate("/dashboard", {replace: true});
+   
   };
 
   return (
@@ -83,7 +87,7 @@ export default function OtpSignup() {
           </Box>
         
         </Box>
-        {successfulSignup && <Navigate to="/dashboard" replace={true}/>}
+        
       </Container>
    
   );
