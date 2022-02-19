@@ -49,12 +49,12 @@ export default function Login() {
       setIsLoggedIn(true);
       setUser(response.data.user);
       setToken(response.data.token);
-      localStorage.setItem("user", response.data.user);
+      localStorage.setItem("user", JSON.stringify(response.data.user));
       localStorage.setItem("token", response.data.token);
       navigate("/dashboard", {replace: true});
       
       console.log(response.data.user);
-    
+      
   
    
     

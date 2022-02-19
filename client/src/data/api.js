@@ -75,3 +75,20 @@ export const getAirInfo = async () => {
     throw err;
   }
 }
+
+export const createEvent = async (formData, token) => {
+  try {
+    console.log(token);
+    const { data } = await axios.post(apiUrl + "event/create", formData, {
+      headers: {
+        "Authorization" : `Bearer ${token}`
+      }
+
+    });
+    console.log(data);
+    if (data)
+    {return data};
+  } catch (err) {
+    throw err;
+  }
+};

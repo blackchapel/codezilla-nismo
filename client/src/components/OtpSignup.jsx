@@ -33,7 +33,7 @@ export default function OtpSignup() {
       userid: user.userID
     }, token);
     setIsLoggedIn(true);
-    localStorage.setItem("user", response.data.user);
+    localStorage.setItem("user", JSON.stringify(response.data.user));
     localStorage.setItem("token", response.data.token);
     setCurrentUser(response.data.token, response.data.user);
     navigate("/dashboard", {replace: true});

@@ -13,7 +13,7 @@ export const UserProvider = ({ children }) => {
     setUser(receivedUser);
   }
   useEffect((() => {
-    setUser(localStorage.getItem("user"));
+    setUser(JSON.parse(localStorage.getItem("user")));
     setToken(localStorage.getItem("token"));
     if(localStorage.getItem("user") != "") {setIsLoggedIn(true)}
     else {setIsLoggedIn(false)};
