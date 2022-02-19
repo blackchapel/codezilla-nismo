@@ -47,44 +47,30 @@ export const verifySignupOtp = async (formData, token) => {
   }
 };
 
-// export const verifyPhoneOtp = async (formData) => {
-//   try {
-//     const { data } = await axios.put( apiUrl + "user/authenticate/phoneotp",
-//       formData
-//     );
-//     console.log(data);
-//     if (data) {
-//       return data;
-//     }
-//   } catch (err) {
-//     throw err;
-//   }
-// };
 
 export const setUpAxiosHeader = (token) => {
   axios.defaults.headers.common['Authorization'] = `Bearer ${token}` 
 }
 
-export const verifyLoginOtp = async (formData) => {
+
+// let ip = "";
+// const getData = async () => {
+//   const res = await axios.get('https://geolocation-db.com/json/')
+//   ip = res.data.IPv4;
+// }
+
+export const getAirInfo = async () => {
+  
   try {
-    const { data } = await axios.post(
-      apiUrl + "user/authenticate/verifyLogin",
-      formData
-    );
+    const res = await axios.get('https://geolocation-db.com/json/')
+    // const ip = res.data.IPv4;
+    const {data} = await axios.get(apiUrl + "data/climate", res.data.IPv4);
     console.log(data);
     if (data) {
-      return data;
+        return (data);
     }
-  } catch (err) {
-    throw err;
-  }
-};
-
-
-
-export const productListing = async (data, id) => {
-  try {
-    await axios.post(apiUrl + "create/product/" + id, data);
+   
+    
   } catch (err) {
     throw err;
   }

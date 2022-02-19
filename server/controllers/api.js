@@ -11,6 +11,7 @@ const dotenv = require('dotenv').config();
 const airQualityData = (req, res) => {
     let geoIP = new GeoIP('at_nEGZx2X4Fgjxve5jdjrxasNCi2a35');
     geoIP.lookup(req.body.ip, (err, data) => {
+        
         if (err) throw err;
         var options = {
             method: 'GET',

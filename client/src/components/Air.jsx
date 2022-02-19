@@ -1,6 +1,9 @@
 import { Grid, Typography } from "@mui/material";
-import React from "react";
-const sampleData = {
+import React, {useEffect, useState} from "react";
+import axios from 'axios'
+import { getAirInfo } from "../data/api";
+
+let sampleData = {
   "CO": 1.479,
   "NO2": 11.897,
   "OZONE": 21,
@@ -15,7 +18,36 @@ const sampleData = {
       "category": "Unhealthy for Sensitive Groups"
   }
 }
+
+
+
 function Air() {
+
+  const [climateData, setClimateData] = useState({});
+  const [comment, setComment] = useState("Okay");
+  useEffect(() => {
+    (async () => {
+    try {
+      const response = await getAirInfo();
+      console.log(response);
+      setClimateData(response);
+      if (response.AQI <= 100) {
+        setComment("Good");
+      } else if (response.AQI > 100 && response.AQI <= 200) {
+        setComment("Not Great");
+      } else {
+        setComment("Bad");
+      }
+    
+    } catch(err) {
+    console.log(err);
+     }
+  })();
+  }, []);
+
+  
+  // console.log(climateData);
+  // setSampleData(getAirInfo(ip));
   return (
     <Grid
       container
@@ -25,7 +57,7 @@ function Air() {
       spacing={3}
     >
       <Grid item>
-            <Typography variant="h1" color="black">Around   You</Typography>
+            <Typography variant="h1" color="black">Around   You {``}</Typography>
           </Grid>
       <Grid item>
         <Grid
@@ -49,7 +81,7 @@ function Air() {
             >
               <Grid item>
                 <Typography variant="h3" color="white">
-                {sampleData.CO}
+                {climateData.CO ? climateData.CO : sampleData.CO}
                 </Typography>
               </Grid>
               <Grid item>
@@ -71,7 +103,7 @@ function Air() {
             >
               <Grid item>
                 <Typography variant="h3" color="white">
-                  {sampleData.SO2}
+                  {climateData.SO2 ? climateData.SO2 : sampleData.SO2}
                 </Typography>
               </Grid>
               <Grid item>
@@ -93,7 +125,7 @@ function Air() {
             >
               <Grid item>
                 <Typography variant="h3" color="white">
-                  {sampleData.NO2}
+                {climateData.NO2 ? climateData.NO2 : sampleData.NO2}
                 </Typography>
               </Grid>
               <Grid item>
@@ -115,7 +147,7 @@ function Air() {
             >
               <Grid item>
                 <Typography variant="h3" color="white">
-                  {sampleData.AQI}
+                {climateData.AQI ? climateData.AQI : sampleData.AQI}
                 </Typography>
               </Grid>
               <Grid item>
@@ -128,7 +160,7 @@ function Air() {
         </Grid>
       </Grid>
       <Grid item>
-            <Typography variant="h4" color="text.secondary">This is {sampleData.aqiInfo.category}</Typography>
+            <Typography variant="h4" color="text.secondary">This is {comment + "."}</Typography>
       </Grid>
     </Grid>
   );
