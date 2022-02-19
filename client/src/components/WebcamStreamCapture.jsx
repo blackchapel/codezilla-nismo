@@ -54,7 +54,7 @@ export const WebcamStreamCapture = () => {
   
     return (
       <>
-        <Webcam audio={false} ref={webcamRef} />
+        <Webcam audio={true} ref={webcamRef} />
         {capturing ? (
           <button onClick={handleStopCaptureClick}>Stop Capture</button>
         ) : (
