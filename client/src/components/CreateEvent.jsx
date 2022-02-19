@@ -15,32 +15,42 @@ import Stack from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import { FormControl } from "@mui/material";
+import { useContext } from "react";
+import UserContext from "../contexts/UserContext";
+import {createEvent} from "../data/api";
+import { useNavigate } from "react-router-dom";
 
 export default function CreateEvent() {
-  const [category, setCategory] = React.useState("Planting Trees");
-  const handleSubmit = (event) => {
+  const navigate = useNavigate();
+  const {user, token} = useContext(UserContext);
+  const [activity, setActivity] = React.useState("Planting Trees");
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    let credits = category.slice(-2);
-    let cat = category.substring(0,(category.length - 2));
+    let credits = activity.slice(-2);
+    credits = parseInt(credits);
+    let cat = activity.substring(0,(activity.length - 2));
+    
     // eslint-disable-next-line no-console
+   
 
-    console.log({
+    const response = await createEvent({
       eventname: data.get("eventname"),
-      activity: data.get("activity"),
-      details: data.get("details"),
+      activity: cat,
+      description: data.get("details"),
       date: data.get("date"),
       starttime: data.get("starttime"),
       endtime: data.get("endtime"),
-      category: cat,
-      location: data.get("location"),
+      address: data.get("location"),
       pincode: data.get("pincode"),
       credits: credits,
-    });
+      
+    }, localStorage.getItem("token"));
+    response.message == "Event created successfully!" ? navigate("/") : alert(response.message);
   };
-  
+  // eventhost: JSON.parse(localStorage.getItem("user"))
   const handleChange = (event) => {
-    setCategory(event.target.value);
+    setActivity(event.target.value);
   };
 
   return (
@@ -100,79 +110,13 @@ export default function CreateEvent() {
               name="eventname"
               autoFocus
             />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="activity"
-              label="What is the Event for?"
-              id="activity"
-            />
-            <TextField
-              margin="normal"
-              multiline
-              fullWidth
-              name="details"
-              label="Additional Event Details"
-              id="details"
-            />
-            <Grid
-              container
-              direction="row"
-              justifyContent="flex-start"
-              alignItems="center"
-              spacing={2}
-            >
-              <Grid item>
-                <TextField
-                  id="date"
-                  name="date"
-                  label="Date"
-                  type="date"
-                  // type="datetime-local"
-                  defaultValue="2017-05-24"
-                  sx={{ width: 250, marginTop: "20px", marginBottom: "20px" }}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-              </Grid>
-              <Grid item>
-                <TextField
-                  id="starttime"
-                  name="starttime"
-                  label="StartTime"
-                  type="time"
-                  // type="datetime-local"
-                  // defaultValue="2017-05-24"
-                  sx={{ width: 250, marginTop: "20px", marginBottom: "20px" }}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-              </Grid>
-              <Grid item>
-                <TextField
-                  id="endtime"
-                  name="endtime"
-                  label="EndTime"
-                  type="time"
-                  // type="datetime-local"
-                  // defaultValue="2017-05-24"
-                  sx={{ width: 250, marginTop: "20px", marginBottom: "20px" }}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-              </Grid>
-            </Grid>
-
-            <InputLabel id="demo-simple-select-label">Category</InputLabel>
+           
+            <InputLabel id="demo-simple-select-label">What is the event for? </InputLabel>
             <Select
               labelId="demo-simple-select-label"
-              id="category"
-              name="category"
-              value={category}
+              id="activity"
+              name="activity"
+              value={activity}
               defaultValue={"Planting Trees"}
               onChange={handleChange}
               fullWidth
@@ -214,6 +158,66 @@ export default function CreateEvent() {
                 Rainwater harvesting
               </MenuItem>
             </Select>
+            <TextField
+              margin="normal"
+              multiline
+              fullWidth
+              name="details"
+              label="Additional Event Details"
+              id="details"
+            />
+            <Grid
+              container
+              direction="row"
+              justifyContent="flex-start"
+              alignItems="center"
+              spacing={2}
+            >
+              <Grid item>
+                <TextField
+                  id="date"
+                  name="date"
+                  label="Date"
+                  type="date"
+                  // type="datetime-local"
+                  defaultValue="2022-03-01"
+                  sx={{ width: 250, marginTop: "20px", marginBottom: "20px" }}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </Grid>
+              <Grid item>
+                <TextField
+                  id="starttime"
+                  name="starttime"
+                  label="StartTime"
+                  type="time"
+                  // type="datetime-local"
+                  // defaultValue="2017-05-24"
+                  sx={{ width: 250, marginTop: "20px", marginBottom: "20px" }}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </Grid>
+              <Grid item>
+                <TextField
+                  id="endtime"
+                  name="endtime"
+                  label="EndTime"
+                  type="time"
+                  // type="datetime-local"
+                  // defaultValue="2017-05-24"
+                  sx={{ width: 250, marginTop: "20px", marginBottom: "20px" }}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </Grid>
+            </Grid>
+
+           
             <Grid
               container
               direction="row"
